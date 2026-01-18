@@ -1,0 +1,4 @@
+-- Active: 1768564694681@@127.0.0.1@5432@simple_bank
+DROP TABLE IF EXISTS entries;
+DROP TABLE IF EXISTS transfers;
+DROP TABLE IF EXISTS accounts;
