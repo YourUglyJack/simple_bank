@@ -2,7 +2,6 @@ package api
 
 import (
 	db "simple_bank/db/sqlc"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,6 +10,7 @@ type Server struct {
 	router *gin.Engine
 }
 
+
 func NewServer(store *db.Store) *Server {
 	server := &Server{
 		store: store,
@@ -18,7 +18,12 @@ func NewServer(store *db.Store) *Server {
 
 	router := gin.Default()
 
-	router.POST("/accounts", server.createAccount)
+	accounts := router.Group("/accounts")
+	{
+		accounts.POST("", server.createAccount)
+		accounts.GET("/:id", server.getAccount)
+		accounts.GET("", server.listAccount)
+	}
 
 	server.router = router
 	return server
